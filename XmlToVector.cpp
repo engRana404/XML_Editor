@@ -33,3 +33,56 @@ string removeSpaces(string line){
   
     return result_line;
 }
+
+
+/*
+Turn string into vector
+*/
+
+vector<string> convert2vector(string xmlFile){
+    vector <string> xmlVector;
+    //Loop over the whole file
+    for(int i=0; i<xmlFile.length();i++){
+            string XmlTemp="";
+            if(xmlFile[i]=='<'){
+                while(xmlFile[i]!='>'){
+                    //add characters of the wanted tag
+                    XmlTemp+=xmlFile[i];
+                    //Go to next char.
+                    i++;
+                    }//End of while == We have <word inside temp
+                    //Add '>' to finish the tag
+                    XmlTemp+='>';
+                    i++;
+                    //Clean line from unwanted spaces
+                    XmlTemp= removeSpaces(XmlTemp);
+                    //Push tag into vector
+                    xmlVector.push_back(XmlTemp);
+                    //Clean temp variable
+                    XmlTemp= "";
+                    } //End of if char is <
+            //if it's not <
+            else {
+                    //continue;
+                    while(xmlFile[i]!='<'){
+                        //add characters of the wanted tag
+                       if(xmlFile[i]!='\n'||xmlFile[i]!='\t' || xmlFile[i]!=' ') XmlTemp+=xmlFile[i];
+                        //Go to next char.
+                        i++;
+
+                    }
+                    XmlTemp= removeSpaces(XmlTemp);
+                    cout<<XmlTemp<<endl;
+                    xmlVector.push_back(XmlTemp);
+                    XmlTemp="";
+
+
+
+            }//End of else
+            //in order to not miss '<' charachter at the begining of the mext iteration
+            i--;
+
+
+    }//End of whole file loop
+    return xmlVector;
+}
