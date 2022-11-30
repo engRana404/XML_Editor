@@ -66,13 +66,12 @@ vector<string> convert2vector(string xmlFile){
                     //continue;
                     while(xmlFile[i]!='<'){
                         //add characters of the wanted tag
-                       if(xmlFile[i]!='\n'||xmlFile[i]!='\t' || xmlFile[i]!=' ') XmlTemp+=xmlFile[i];
+                       if(xmlFile[i]!='\n'&& xmlFile[i]!='\t') XmlTemp+=xmlFile[i];
                         //Go to next char.
                         i++;
 
                     }
                     XmlTemp= removeSpaces(XmlTemp);
-                    cout<<XmlTemp<<endl;
                     xmlVector.push_back(XmlTemp);
                     XmlTemp="";
 
