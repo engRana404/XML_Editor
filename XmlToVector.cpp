@@ -72,13 +72,12 @@ vector<string> convert2vector(string xmlFile){
 
                     }
                     XmlTemp= removeSpaces(XmlTemp);
-                    xmlVector.push_back(XmlTemp);
+                    if(XmlTemp!=""){xmlVector.push_back(XmlTemp);}
                     XmlTemp="";
 
 
 
             }//End of else
-            //in order to not miss '<' charachter at the begining of the mext iteration
             i--;
 
 
