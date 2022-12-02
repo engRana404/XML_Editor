@@ -4,6 +4,7 @@
 #include <vector>
 using namespace std;
 
+//function that reads all text in a file and put it in a string and returns the number of words
 int read_words(vector<string>& words, ifstream& in,string&s)
 {
     int i = 0;
