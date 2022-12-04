@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include "Formatting.h"
 using namespace std;
 
 // Find a certain character in a string
