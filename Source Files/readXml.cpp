@@ -2,27 +2,38 @@
 #include <fstream>
 #include <string>
 #include <vector>
+
 using namespace std;
 
-//function that reads all text in a file and put it in a string and returns the number of words
-int read_words(vector<string>& words, ifstream& in,string&s)
+//Function that reads all text in a file (inputFile) and put it in a vector of strings (words) and returns the number of words (i)
+int readWords(vector <string> &words, ifstream &inputFile)
 {
     int i = 0;
-    while (!in.eof()) {
-        in >> words[i];
-        s += words[i]+" ";
+    
+    while (!inputFile.eof())
+    {
+        inputFile >> words[i];
         i++;
     }
-    return i - 1;
+    
+    return i;
 }
 
 int main()
 {
-    ifstream ifp("C:\\Users\\Win10\\Desktop\\senoir 1\\sample.xml");
+    string XMLpath;
 
-    vector<string> w(500);
-    string xml;
-    int number_of_words = read_words(w, ifp,xml);
-    w.resize(number_of_words);
-    cout << xml;
+    cout << "Enter the File's Path:" << endl;
+    cin >> XMLpath;
+
+    ifstream XMLfile(XMLpath);
+
+    vector <string> XMLvector(500);
+
+    int wordsNumber = readWords(XMLvector, XMLfile);
+
+    XMLvector.resize(wordsNumber);
+
+    for(int i = 0; i < XMLvector.size(); i++)
+        cout << XMLvector[i];
  }
