@@ -194,7 +194,7 @@ string VectorToString(vector <string> x)
 	string s;
 	for (int i = 0; i < x.size(); i++)
 	{
-     s = s + x[i];
+           s = s + x[i];
 	}
 	return s;
 }
