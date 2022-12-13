@@ -26,6 +26,7 @@ public:
     void add_child(Node* child);
     Node* pop_child();
     vector<Node*> get_children();
+    bool diffChildern(Node* node);
     void addchild2Node(Node* child, int& level);
     static void addchild(Node* node, Node* child);
     ~Node();
