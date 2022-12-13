@@ -1,103 +1,134 @@
-// XmlToTree.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include <string>
 #include <vector>
-#include "XmlToTree.h"
 #include <stack>
+#include "XmlToTree.h"
 using namespace std;
 
+//For Node class
 Node::Node() 
 {
 
 }
+
 Node::Node(string name, string data)
 {
     this->name = name;
     this->data = data;
 }
+
 string Node::get_name()
 {
     return name;
 }
+
 void Node::set_name(string node_name)
 {
     this->name = name;
 }
+
 string Node::get_data()
 {
     return data;
 }
+
 void Node::set_data(string data)
 {
     this->data = data;
 }
+
 void Node::add_child(Node* child)
 {
     children.push_back(child);
 }
+
 Node* Node::pop_child()
 {
     Node* child = children.back();
     children.pop_back();
     return child;
 }
+
 vector<Node*> Node::get_children() {
     return children;
 }
+
+void Node::addchild2Node(Node* child, int& level) {
+    this->children.push_back(child);
+    level++;
+    return;
+}
+
+void Node::addchild(Node* node, Node* child) {
+    Node* Child;
+    node->get_children().push_back(Child);
+    int static level = 0;
+    node->addchild2Node(child, level);
+}
+
 Node::~Node()
 {
 
 }
 
-void convert2tree(Node* root, vector<string> XML)
-{
-    stack<Node*> node_stack;
-    stack<char> parentsCounter;
-    node_stack.push(root);//pushing root as the first element
-    int xmlTags = 0; // variable used for this tag <? ?>
-
-    for (int i = 0; i < XML.size(); i++)
-    {
-        /*
-           the first line
-           <?   ?>
-        */
-        if (XML[i][0] == '<' && XML[i][1] == '?')
-        {
-            if (!xmlTags)//true in the first time
-            {
-                //put this data in the root
-                node_stack.top()->set_data(XML[i]);
-                xmlTags++;
-            }
-            // if it is Not the first time
-            else
-            {
-                Node* temp = new Node("XML_TAG", XML[i]);//else put this data in a child
-                node_stack.top()->add_child(temp);//make a child to the top element in the stack
-            }
-        }
-        /*
-         comment in xml
-          <!-- comment  -->
-        */
-        else if (XML[i][0] == '<' && XML[i][1] == '!')
-        {
-            Node* temp = new Node("COMMENT_TAG", XML[i]);//else put this data in a child
-            node_stack.top()->add_child(temp);
-        }
-        /*
-         Openning Tag
-          <tag>
-        */
-        else if (XML[i][0] == '<' && XML[i][1] != '!')
-        {
-
-        }
-    }
-
+// For Tree class
+Node Tree::getroot() {
+    return root;
 }
 
+//the function that transfer the xml file to tree of nodes of parents and childs with recursion
+void xml2tree(Node* node, vector <string> xml, int& i, Node* root) {         
+    for (; i < xml.size(); i++)
+    {
+        //if the string hasn't open tag, store the data of the next node
+        if (xml[i].at(0) != '<') 
+        {
+            node->set_data(xml[i]);
+            i++;
+            return;
+        }
+        else if (xml[i].at(1) == '/')  //base case when we have a closedtag
+        {
+            return;
+        }       
+        else 
+        {
+            Node* child = new Node(xml[i], " ");
+            // if it is Not the first time
+            if (root->get_children().size() > 0 && xml[i] == root->get_children()[0]->get_name())
+            {
+                root->addchild(root, child);
+                i++;
+            }
+            //else put this data in a child
+            else
+            {
+                node->addchild(node, child);
+                i++;
+            }
+            xml2tree(child, xml, i, root);
+        }
+    }
+}
 
+vector <Node*> Traversal(Node* root)                     
+{
+    stack <Node*> Stack;
+    stack <string> brackets;
+    //contains all the visited nodes
+    vector < Node* > depth;
+    Stack.push(root);
+
+    while (!Stack.empty()) {
+        Node* temp = Stack.top();
+        Stack.pop();
+        // store the key in preorder vector(visited list)
+        int maxSize;
+        depth.push_back(temp);
+        // Push all of the child nodes of temp into the stack from right to left.
+        for (int i = (temp->get_children()).size() - 1; i >= 0; i--) {
+            Stack.push((temp->get_children())[i]);
+        }
+    }
+    return depth;
+}
