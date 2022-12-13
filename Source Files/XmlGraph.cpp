@@ -21,16 +21,16 @@ vector <vector <int>> FollowerList(vector <Node*> tree)
     while (i < tree.size() -1 )
     {
         //If the name of the node is <user>
-        if (tree[i]->gettagname() == "<user>")
+        if (tree[i]->get_name() == "<user>")
         {
             //We want to get all the data of the current user so we iterate till we reach another <user>
-            while (i < tree.size() - 1 && tree[i + 1]->gettagname() != "<user>" )
+            while (i < tree.size() - 1 && tree[i + 1]->get_name() != "<user>" )
             {
                 //If the element is "<id>"
-                if (tree[i + 1]->gettagname() == "<id>" )
+                if (tree[i + 1]->get_name() == "<id>" )
                 {
                     //Push the id in the list and turn it into int.
-                    list[l].push_back(stoi(tree[i + 1]->getdata()));
+                    list[l].push_back(stoi(tree[i + 1]->get_data()));
 
                 }
                 //ِAdvance i to complete the iteration
@@ -41,7 +41,8 @@ vector <vector <int>> FollowerList(vector <Node*> tree)
             l++;
         }
         else { //skip anything other than user.
-                i++; }
+                i++; 
+        }
     }
 
     return list; //((ids in user 1 ),(ids in user 2),())
@@ -53,12 +54,12 @@ void graph(vector <string> data)
     //Make a root node of the tree
     Node* root = new Node();
     //Let the root name equal to the firt tag in the vector (normally users)
-    root->settagname(data[0]);
+    root->set_name(data[0]);
     int i{ 1 };
     //Create a tree with the root and the rest of the nodes from the vector
-    xmltree(root, data, i, root);
+    xml2tree(root, data, i, root);
    //Traverse the tree ###To do: change the name to depth traversal if it's not preorder one
-    vector <Node*> t = preorderTraversal(root);
+    vector <Node*> t = Traversal(root);
    //Make a vector of vectors of the followers using the previous function
     vector <vector <int>> v = FollowerList(t);
     //A function used to create a file representing the graph ###(Will be removed when we do the GUI)
