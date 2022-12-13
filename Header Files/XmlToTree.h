@@ -26,6 +26,18 @@ public:
     void add_child(Node* child);
     Node* pop_child();
     vector<Node*> get_children();
+    void addchild2Node(Node* child, int& level);
+    static void addchild(Node* node, Node* child);
     ~Node();
 };
 
+class Tree
+{
+private:
+    Node root;
+public:
+    Node getroot();
+};
+
+static void xml2tree(Node* node, vector <string> xml, int& i, Node* root);
+vector <Node*> Traversal(Node* root);
