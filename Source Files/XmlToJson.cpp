@@ -161,9 +161,18 @@ void xmlToJson(Node* root, vector <string>& json)
 string VectorToString(vector <string> x)
 {
 	string s;
+	int z = 0;
 	for (int i = 0; i < x.size(); i++)
 	{
-           s = s + x[i];
+		s = s + x[i];
+		if (x[i] == "{" || x[i] == "[") z++; 
+		if (x[i] == "}" || x[i] == "]") z--;
+		if (x[i] == "\n") {
+			for (int n = 1; n<= z; n++)
+			{
+				s = s + "  "; 
+			}
+		}
 	}
 	return s;
 }
