@@ -46,7 +46,7 @@ string formatting(vector<string> xmlFile)
             if open tags
             <--->
         */
-        else if (findChar('<', xmlFile[i]) && !findChar('/', xmlFile[i]))
+        else if (findChar('<', xmlFile[i]) && !findChar('/', xmlFile[i]) && !findChar('?', xmlFile[i]) && !findChar('!', xmlFile[i]))
         {
             //print the required tabs before the parent
             for (int j = 0; j < parent; j++)
@@ -66,6 +66,29 @@ string formatting(vector<string> xmlFile)
         {
             // decrease the number of parents
             parent--;
+            //print the required tabs before it
+            for (int j = 0; j < parent; j++)
+            {
+                formeted_XML += "   ";
+            }
+            //print new line after the element
+            formeted_XML = formeted_XML + xmlFile[i] + "\n";
+        }
+        /*
+            if first line
+            <?---?>
+        */
+        else if (findChar('<', xmlFile[i]) && findChar('?', xmlFile[i]))
+        {
+            //print new line after the element
+            formeted_XML = formeted_XML + xmlFile[i] + "\n";
+        }
+        /*
+            if comment
+            <!---!>
+        */
+        else if (findChar('<', xmlFile[i]) && findChar('!', xmlFile[i]))
+        {
             //print the required tabs before it
             for (int j = 0; j < parent; j++)
             {
