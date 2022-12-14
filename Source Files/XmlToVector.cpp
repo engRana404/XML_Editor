@@ -26,6 +26,7 @@ string removeSpaces(string line){
 
 vector<string> convert2vector(string xmlFile){
     vector <string> xmlVector;
+    xmlVector.resize(1);
     //Loop over the whole file
     for(int i=0; i<xmlFile.length();i++){
             string XmlTemp="";
