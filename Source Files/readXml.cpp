@@ -5,17 +5,17 @@
 
 using namespace std;
 
-//Function that reads all text in a file (inputFile) and put it in a vector of strings (words) and returns the number of words (i)
-int readWords(vector <string> &words, ifstream &inputFile)
+//Function that reads all text in a file (inputFile) and put it in a string (S) using the vector (words) and returns the number of words (i)
+int readWords(vector <string> &words, ifstream &inputFile, string &S)
 {
     int i = 0;
-    
+
     while (!inputFile.eof())
     {
         inputFile >> words[i];
-        i++;
+        S += words[i] + " ";
     }
-    
+
     return i;
 }
 
@@ -30,10 +30,11 @@ int main()
 
     vector <string> XMLvector(500);
 
-    int wordsNumber = readWords(XMLvector, XMLfile);
+    string XML;     //The string variable where the XML contents will be concatenated into
+
+    int wordsNumber = readWords(XMLvector, XMLfile, XML);
 
     XMLvector.resize(wordsNumber);
 
-    for(int i = 0; i < XMLvector.size(); i++)
-        cout << XMLvector[i];
+    cout << XML;
  }
