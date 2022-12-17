@@ -73,34 +73,3 @@ vector<string> convert2vector(string xmlFile2){
     }//End of whole file loop
     return xmlVector;
 }
-
-
-
-/*int main()
-{
-    ifstream XMLfile("sample.xml");
-
-    vector <string> XMLstring(1);
-
-    string XML;     //The string variable where the XML contents will be concatenated into
-
-    int wordsNumber = readWords(XMLstring, XMLfile, XML);
-
-    //XMLstring.resize(wordsNumber);
-
-    vector<string> xmlVector;
-
-    xmlVector = convert2vector(XML);
-
-    for(int i = 0; i < xmlVector.size(); i++)
-        cout << xmlVector[i];
-
-        cout << endl;
-        cout << "-----------------------------------------------" << endl;
-        cout << xmlVector.size() << endl;
-
-
-
-    return 0;
-}*/
-
