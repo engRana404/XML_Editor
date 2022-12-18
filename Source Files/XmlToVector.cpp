@@ -1,9 +1,9 @@
-using namespace std;
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
-
+#include "XmlToVector"
+using namespace std;
 
 /*
 We want to remove spaces from start and end of the line only but not the spaces inside the line;
@@ -70,16 +70,3 @@ vector<string> convert2vector(string xmlFile){
     }//End of whole file loop
     return xmlVector;
 }
-
-int main()
-{
-
-    string xml = "<root>        <name>john</name>        <loc>brazil</loc>       <age>95 </age >        </entry>        <entry>       <foo>charles</foo>";
-    vector<string> xmlVector;
-    xmlVector = convert2vector(xml);
-    cout << xmlVector[1];
-
-
-    return 0;
-}
-
