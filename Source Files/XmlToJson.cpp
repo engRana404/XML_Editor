@@ -96,9 +96,10 @@ void xmlToJson(Node* root, vector <string>& json)
 		if (x[i]->get_children().size() == 0)
 
 		{
-			if ((x[i]->get_name()) != "<topic>") {
-				json.push_back(getString(x[i]->get_name()));
-			}
+			if ((x[i]->get_name()) != "<topic>" && (json[json.size() - 1] != getString(x[i]->get_name()))) 
+			{
+					json.push_back(getString(x[i]->get_name()));
+		        }
 
 			json.push_back(x[i]->get_data());
 
