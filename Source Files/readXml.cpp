@@ -1,7 +1,4 @@
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <vector>
+#include "readXml.h"
 
 using namespace std;
 
@@ -32,28 +29,8 @@ int readWords(vector <string> &words, ifstream &inputFile, string &S)
         inputFile >> words[i];
         S2 += words[i] + " ";
     }
-    
+
     S = removeSpaces(S2);
 
     return i;
 }
-
-int main()
-{
-    string XMLpath;
-
-    cout << "Enter the File's Path:" << endl;
-    cin >> XMLpath;
-
-    ifstream XMLfile(XMLpath);
-
-    vector <string> XMLvector(500);
-
-    string XML;     //The string variable where the XML contents will be concatenated into
-
-    int wordsNumber = readWords(XMLvector, XMLfile, XML);
-
-    XMLvector.resize(wordsNumber);
-
-    cout << XML;
- }
