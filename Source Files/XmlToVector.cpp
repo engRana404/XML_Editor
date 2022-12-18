@@ -2,12 +2,8 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "XmlToVector"
-using namespace std;
+#include "XmlToVector.h"
 
-/*
-We want to remove spaces from start and end of the line only but not the spaces inside the line;
-*/
 string removeSpaces(string line){
     int start = 0;
     while(line[start] == ' ' || line[start] == '\t' || line[start] == '\n'){
@@ -27,6 +23,8 @@ string removeSpaces(string line){
 vector<string> convert2vector(string xmlFile){
     vector <string> xmlVector;
     xmlVector.resize(1);
+    //Clean line from unwanted spaces
+    xmlFile= removeSpaces(xmlFile);
     //Loop over the whole file
     for(int i=0; i<xmlFile.length();i++){
             string XmlTemp="";
@@ -40,8 +38,6 @@ vector<string> convert2vector(string xmlFile){
                     //Add '>' to finish the tag
                     XmlTemp+='>';
                     i++;
-                    //Clean line from unwanted spaces
-                    XmlTemp= removeSpaces(XmlTemp);
                     //Push tag into vector
                     xmlVector.push_back(XmlTemp);
                     //Clean temp variable
@@ -60,9 +56,6 @@ vector<string> convert2vector(string xmlFile){
                     XmlTemp= removeSpaces(XmlTemp);
                     if(XmlTemp!=""){xmlVector.push_back(XmlTemp);}
                     XmlTemp="";
-
-
-
             }//End of else
             i--;
 
