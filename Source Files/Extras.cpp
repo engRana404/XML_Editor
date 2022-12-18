@@ -37,7 +37,7 @@ void writeToFile_int(string fileName, vector<int> intVector)    //Takes the path
     Output.close();
 }
 
-void writeToFile_string(string fileName, vector<string> stringVector)   ////Takes the path of the file we will write into and takes the file input as a vector of strings
+void writeToFile_string(string fileName, vector<string> stringVector)   //Takes the path of the file we will write into and takes the file input as a vector of strings
 {
     ofstream Output;
 
