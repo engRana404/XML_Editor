@@ -1,4 +1,5 @@
 #include "CorrectErr.h"
+
 using namespace std;
 //Function that reads all text in a file (inputFile) and put it in a vector of strings (words) and returns the number of words (i)
 bool isNumber(const string& s)
@@ -6,16 +7,6 @@ bool isNumber(const string& s)
    	string::const_iterator it = s.begin();
     while (it != s.end() && isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
-}
-int read_words(vector<string>& words, ifstream& in,string&s)
-{
-    int i = 0;
-    while (!in.eof()) {
-        in >> words[i];
-        s += words[i]+" ";
-        i++;
-    }
-    return i - 1;
 }
 vector<string> CorrectErrors(vector<string> XmlVector){
     vector<string> result=XmlVector;
