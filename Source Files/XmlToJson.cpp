@@ -13,14 +13,6 @@ string getString(string r)
 	return r;
 }
 
-//check if a node has same type of childern or not
-bool diffChildern(Node* node) {
-	if (node->get_children()[0]->get_name() != node->get_children()[1]->get_name())
-		return true;
-	if (node->get_children()[0]->get_name() == node->get_children()[1]->get_name())
-		return false;
-}
-
 //convert xml to json vector 
 void xmlToJson(Node* root, vector <string>& json)
 {    

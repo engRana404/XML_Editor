@@ -27,7 +27,6 @@ public:
     void add_child(Node* child);
     Node* pop_child();
     vector<Node*> get_children();
-    bool diffChildern(Node* node);
     void addchild2Node(Node* child, int& level);
     static void addchild(Node* node, Node* child);
     ~Node();
@@ -41,5 +40,6 @@ public:
     Node getroot();
 };
 
+bool Node::diffChildern(Node* node);
 static void xml2tree(Node* node, vector <string> xml, int& i, Node* root);
 vector <Node*> Traversal(Node* root);

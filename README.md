@@ -32,6 +32,6 @@ The XML editor was built using QT for the interactive GUI. For the backend, we u
 
 <a href="https://github.com/engRana404/XML_Editor/graphs/contributors">
     
-  <img src="https://contrib.rocks/image?repo=engRana404/XML_Editor" />
+  <img src="https://contrib.rocks/image?repo = engRana404/XML_Editor" />
 
 </a>

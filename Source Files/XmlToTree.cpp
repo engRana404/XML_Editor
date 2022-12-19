@@ -53,14 +53,6 @@ vector<Node*> Node::get_children() {
     return children;
 }
 
-//check if a node has same type of childern or not
-bool Node::diffChildern(Node* node) {
-    if (node->get_children()[0]->get_name() != node->get_children()[1]->get_name())
-        return true;
-    if (node->get_children()[0]->get_name() == node->get_children()[1]->get_name())
-        return false;
-}
-
 void Node::addchild2Node(Node* child, int& level) {
     this->children.push_back(child);
     level++;
@@ -82,6 +74,11 @@ Node::~Node()
 // For Tree class
 Node Tree::getroot() {
     return root;
+}
+
+//check if a node has same type of childern or not
+bool Node::diffChildern(Node* node) {
+    return (node->get_children()[0]->get_name() != node->get_children()[1]->get_name());
 }
 
 //the function that transfer the xml file to tree of nodes of parents and childs with recursion
