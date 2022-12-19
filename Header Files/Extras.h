@@ -1,9 +1,12 @@
+#pragma once
 #include <iostream>
 #include <fstream>
 #include <string>
 #include <vector>
 
-#pragma once
+string getString(string r);
+
+bool findChar(char charToFind, string input);
 
 void removeEndTags(std::vector<std::string> &XMLvector);
 

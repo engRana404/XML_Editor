@@ -2,6 +2,24 @@
 
 using namespace std;
 
+// convert from this form <user> to this "user":
+string getString(string r)
+{
+	r = r.substr(1, r.length() - 2);
+	r = "\"" + r + "\":";
+	return r;
+}
+
+// Find a certain character in a string
+bool findChar(char charToFind, string input) {
+    for (int i = 0; i < input.length() - 1; i++) {
+        if (input[i] == charToFind) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
 void removeEndTags(vector<string> &XMLvector)   //Removes all end tags from a vector of strings having the XML file contents
 {
     vector<string>::iterator itr;

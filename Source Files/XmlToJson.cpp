@@ -3,15 +3,9 @@
 #include <vector>
 #include <stack>
 #include "XmlToTree.h"
+#include "Extras.h"
 using namespace std;
 
-// convert from this form <user> to this "user":
-string getString(string r)
-{
-	r = r.substr(1, r.length() - 2);
-	r = "\"" + r + "\":";
-	return r;
-}
 
 //convert xml to json vector 
 void xmlToJson(Node* root, vector <string>& json)

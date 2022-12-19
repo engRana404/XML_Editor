@@ -2,17 +2,9 @@
 #include <string>
 #include <vector>
 #include "Formatting.h"
+#include "XmlToVector.h"
+#include "Extras.h"
 using namespace std;
-
-// Find a certain character in a string
-bool findChar(char x, string y) {
-    for (int i = 0; i < y.length() - 1; i++) {
-        if (y[i] == x) {
-            return 1;
-        }
-    }
-    return 0;
-}
 
 /*
 This function corrects the formatting of the XML file
@@ -28,9 +20,10 @@ input      -------->   output
 
 */
 
-//if the input is vector of strings
-string formatting(vector<string> xmlFile)
+//These Function use convert2vector from XmlToVector.h and findChar from Extras.h
+string formatting(string xml)
 {
+    vector<string> xmlFile = convert2vector(xml);
     string formeted_XML; //store the formeted xml file
     int parent = 0; //count the number of perants
 
@@ -97,7 +90,7 @@ string formatting(vector<string> xmlFile)
             //print new line after the element
             formeted_XML = formeted_XML + xmlFile[i] + "\n";
         }
-        // if any thing else comment or the first line in the xml or the any sentence
+        // if any thing else comment or any sentence
         else
         {
             //print the required tabs before the element
