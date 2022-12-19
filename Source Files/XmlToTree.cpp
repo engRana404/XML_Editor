@@ -77,7 +77,7 @@ Node Tree::getroot() {
 }
 
 //check if a node has same type of childern or not
-bool Node::diffChildern(Node* node) {
+bool diffChildern(Node* node) {
     return (node->get_children()[0]->get_name() != node->get_children()[1]->get_name());
 }
 

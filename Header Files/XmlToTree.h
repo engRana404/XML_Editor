@@ -40,6 +40,6 @@ public:
     Node getroot();
 };
 
-bool Node::diffChildern(Node* node);
+bool diffChildern(Node* node);
 static void xml2tree(Node* node, vector <string> xml, int& i, Node* root);
 vector <Node*> Traversal(Node* root);
