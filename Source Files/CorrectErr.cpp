@@ -73,7 +73,7 @@ vector<string> CorrectErrors(vector<string> XmlVector){
                 }
             }
         }
-         if(line=="<id>"){
+         if(line=="<id>"&&XmlVector[i+1]=="1" &&XmlVector[i+2]=="<name>"){
                 result.emplace(result.begin()+5,"</id>");
         }
     }
