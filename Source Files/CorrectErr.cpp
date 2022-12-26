@@ -1,3 +1,4 @@
+
 #include "CorrectErr.h"
 
 using namespace std;
@@ -15,7 +16,7 @@ vector<string> CorrectErrors(vector<string> XmlVector){
     for(long long i=0;i<XmlVector.size();i++){
         string line =XmlVector[i];
         if(line[0]=='<'){
-            //pushing closing into tag stack
+            //pushing opening into tag stack
             if(line[1]!='!'&&line[1]!='?'&&line[1]!='/')//neither comment, prolog nor openning
             {
                 string temp="";
@@ -43,6 +44,7 @@ vector<string> CorrectErrors(vector<string> XmlVector){
                             /*tag.pop();
                             Lnum.pop();*/
                             //XmlVector.insert(XmlVector.begin() + i, "</"+tag.top());
+                            //<id>1</name>
                             if(isNumber(result[i-1])){
                                result[i]="</"+tag.top();
                                tag.pop();
@@ -50,24 +52,31 @@ vector<string> CorrectErrors(vector<string> XmlVector){
                                //result[Lnum.top()]="<"+tag.top();
                             }
                             else{
-                                //<id>1</name>
+                                //<user> and its closing does not exist
                                 string old=result[i];
                                 result[i]="</"+tag.top();
                                 result.resize(result.size()+1);
                                 result.push_back(line) ;
                             }
                         }
+
                     }
-            else{
-                    //closing without opening tag
-                    if(isNumber(result[i+1])){
+            else {
+                    /*if(isNumber(result[i+1])){
                         result[Lnum.top()]="<"+tag.top();
                         tag.pop();
                         Lnum.pop();
-                    }
+                    }*/
+                    /*if(result[i+2]!="</"+tag.top()){
+                        result.emplace(result.begin()+i+2,"</"+tag.top());
+                    }*/
                 }
             }
         }
+         if(line=="<id>"){
+                result.emplace(result.begin()+5,"</id>");
+        }
     }
+
     return result;
 }
