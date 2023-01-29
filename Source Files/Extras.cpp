@@ -3,13 +3,14 @@
 using namespace std;
 
 // convert from this form <user> to this "user":
-string getString(string r)
+// convert from this form <user> to this "user":
+string getString(string t1)
 {
-	r = r.substr(1, r.length() - 2);
-	r = "\"" + r + "\":";
-	return r;
+    t1.replace(0, 1, "\"");
+    t1.replace(t1.length() - 1, 1, "\"");
+    t1 = t1 + ":";
+    return t1;
 }
-
 // Find a certain character in a string
 bool findChar(char charToFind, string input) {
     for (int i = 0; i < input.length() - 1; i++) {

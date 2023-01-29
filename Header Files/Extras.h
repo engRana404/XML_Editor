@@ -3,6 +3,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+using namespace std;
 
 string getString(string r);
 
