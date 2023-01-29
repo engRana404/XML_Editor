@@ -1,26 +1,16 @@
-#include <iostream>
-#include <fstream>
-#include <string>
+#include "JSON_Formatter.h" 
 
-using namespace std;
-
-
-string json_tree(string file_path)
+string json_formatter(string input)
 {
-	ifstream fin;
+	//ifstream fin;
 	string json = "";
 	int tabs, tokens; //here tokens are  { } , :
 	tokens = -1;
 	char ch;
-	fin.open(file_path.c_str());
-	if (!fin)
-		cout << "Failed to open file";
-	else
+	//fin.open(file_path.c_str());
+	for(int i = 0; i < input.size(); i++)
 	{
-		while (fin.get(ch))
-		{
-
-			if (ch == '{')
+			if (input[i] == '{')
 			{
 				tokens++;
 
@@ -43,11 +33,11 @@ string json_tree(string file_path)
 					tabs--;
 				}
 			}
-			else if (ch == ':')
+			else if (input[i] == ':')
 			{
 				json += " : ";
 			}
-			else if (ch == ',')
+			else if (input[i] == ',')
 			{
 				json += ",\n";
 				tabs = tokens + 1;
@@ -57,7 +47,7 @@ string json_tree(string file_path)
 					tabs--;
 				}
 			}
-			else if (ch == '}')
+			else if (input[i] == '}')
 			{
 				tabs = tokens;
 				json += "\n";
@@ -79,13 +69,12 @@ string json_tree(string file_path)
 			}
 			else
 			{
-				if (ch == '\n' || ch == '\t')
+				if (input[i] == '\n' || input[i] == '\t')
 					continue;
 				else
-					json += ch;
+					json += input[i];
 			}
 		}
 	}
-	fin.close();
 	return json;
 }
