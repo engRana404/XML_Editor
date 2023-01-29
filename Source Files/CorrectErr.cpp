@@ -18,7 +18,7 @@ map<int, string> CorrectErr(vector<string> xml){
                 if (l[1] == '/') {
                     if(!tag.empty()){
                         if (l != ("</" + tag.top())) {
-                            // tags mismatch --> make a closing tag that fits the opening one
+                            // tags mismatch -> make a closing tag that fits the opening one
                             result[i] = "</" + tag.top();
                             tag.pop();
                             lineNum.pop();
@@ -29,7 +29,7 @@ map<int, string> CorrectErr(vector<string> xml){
                         }
                     }
                     else{
-                        // closing tag without opening tag    --->   remove it
+                        // closing tag without opening tag    ->   remove it
                         result.erase(i);
                     }
                 }
@@ -66,17 +66,4 @@ map<int, string> CorrectErr(vector<string> xml){
         }
         return result;
 }
-int main(){
-    ifstream ifp("C:/Users/oem/Desktop/Files/DS_Project/sample.xml");
-    vector<string> w(500);
-    string xml;
-    readWords(w, ifp, xml);
-    cout<<xml<<endl;
-    vector<string> XMLvector=convert2vector(xml);
-    for(const auto& elem : CorrectErr(XMLvector))
-    {
-        cout << elem.first << " " << elem.second<< "\n";
-    }
 
-return 0;
-}
