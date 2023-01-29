@@ -100,6 +100,7 @@ void xmlToJson(Node* root, vector <string>& json)
 
 
 			//pop top bracket when all childern are finished
+			if (num_of_children.size() != 0) {
 			int z = num_of_children.top() - 1;
 			if (z == 0) {
 				string j = brackets.top();
@@ -120,7 +121,7 @@ void xmlToJson(Node* root, vector <string>& json)
 
 			}
 			num_of_children.pop();
-			num_of_children.push(z);
+			num_of_children.push(z);}
 			//loop to check all nodes with finished childern to pop their brackets
 			for (int n = 0; n < num_of_children.size(); n++) {
 
