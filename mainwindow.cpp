@@ -7,6 +7,7 @@
 #include <QVector>
 #include <QTextStream>
 #include <QDir>
+#include <QMessageBox>
 //For better graphics
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -19,7 +20,7 @@
 #include "XmlToJson.h"
 #include "Extras.h"
 #include "Compression.h"
-
+#include "Xml_Consistency.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -80,6 +81,24 @@ void MainWindow::on_Clear_clicked(){
     //ui->InputText->setPlainText("");
 }
 
+//Check the consistency
+void MainWindow::on_check_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeChecked =text.toStdString();
+   bool con=IsConsistent(convert2vector(removeSpaces(textToBeChecked)));
+   if(con){
+       QMessageBox msgBox;
+       msgBox.setText("Your file has no problem.");
+       msgBox.exec();
+   }
+   else{
+       QMessageBox msgBox;
+       msgBox.setText("The file has errors please use the Correct button to know what to do!");
+       msgBox.exec();
+   }
+}
+
 //Formating File
 void MainWindow::on_format_clicked(){
     //Get text from user
@@ -118,10 +137,13 @@ void MainWindow::on_correct_clicked(){
     map<int, string> Result= CorrectErr(convert2vector(removeSpaces(textToBeFormatted)));
 
     string Resultstr="";
+    string s="";
 
     for(const auto& elem :Result )
+
         {
-            Resultstr=Resultstr+elem.second;
+            s=to_string(elem.first);
+            Resultstr=Resultstr+"At line "+s+": we should use "+elem.second+"\n";
         }
     //return to QString
     QString OutString = QString::fromStdString(Resultstr);
@@ -148,23 +170,43 @@ void MainWindow::on_JSON_clicked(){
     ui->OutputText->setPlainText(OutString);
 }
 
-/*//void on_Graph_clicked(){}
-//void on_decompress_clicked(){}
+//void MainWindow::on_Graph_clicked(){}
+void MainWindow::on_decompress_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text.toStdString();
+    vector<int> Resint;
+    //int compress=stoi(textToBeFormatted);
+    for(int i=0;i<textToBeFormatted.length();i++){
+        Resint.push_back(int(textToBeFormatted[i])-48);
+    }
+    vector<string> Result=DecompressXML(Resint);
+    string Resultstr="";
+
+    for(int i=0;i<Result.size();i++)
+        {
+            Resultstr=Resultstr+Result[i];
+        }
+    QString OutString = QString::fromStdString(Resultstr);
+    //Show
+    ui->OutputText->setPlainText(OutString);
+}
+
 void MainWindow::on_compress_clicked(){
    QString text = ui->OutputText->toPlainText();
    //Turn into std string
    string textToBeFormatted =text.toStdString();
-   vector<string> Result= CompressXML(textToBeFormatted);
+   vector<int> Result= CompressXML(textToBeFormatted);
 
    string Resultstr="";
 
    for(int i=0;i<Result.size();i++)
        {
-           Resultstr=Resultstr+Result[i];
+           Resultstr=Resultstr+to_string(Result[i]);
        }
    QString OutString = QString::fromStdString(Resultstr);
    //Show
    ui->OutputText->setPlainText(OutString);
 
 }
-*/
+

@@ -44,9 +44,10 @@ private slots:
     void on_minify_clicked();
    void on_JSON_clicked();
    void on_correct_clicked();
+   void on_check_clicked();
   // void on_Graph_clicked();
- // void on_decompress_clicked();
-    //void on_compress_clicked();
+   void on_decompress_clicked();
+   void on_compress_clicked();
 
 
 
