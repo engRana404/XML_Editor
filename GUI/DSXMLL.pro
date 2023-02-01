@@ -22,6 +22,7 @@ SOURCES += \
     Extras.cpp\
     Compression.cpp\
 
+
 HEADERS += \
     mainwindow.h\
     Xml_Consistency.h\
@@ -34,6 +35,7 @@ HEADERS += \
     XmlToJson.h\
     Extras.h\
     Compression.h\
+    XmlGraph.h\
 
 FORMS += \
     mainwindow.ui

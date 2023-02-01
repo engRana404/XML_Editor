@@ -35,8 +35,6 @@ public:
 
 private slots:
 
-    //void on_checkbutton_clicked();
-    //void on_CompressionButton_clicked();
     void on_Save_clicked();
     void on_Clear_clicked();
     void on_format_clicked();
@@ -45,9 +43,10 @@ private slots:
    void on_JSON_clicked();
    void on_correct_clicked();
    void on_check_clicked();
-  // void on_Graph_clicked();
-   void on_decompress_clicked();
+   void on_Graph_clicked();
+  // void on_decompress_clicked();
    void on_compress_clicked();
+   void on_Analysis_clicked();
 
 
 

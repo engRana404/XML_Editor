@@ -1,7 +1,9 @@
 #include <string>
 #include <vector>
+#include <iostream>
+#include <fstream>
 #include "XmlToTree.h"
- //A .h file to be updated soon
+#include "XmlGraph.h"
 
 
 
@@ -53,8 +55,8 @@ void graph(vector <string> data)
     //Make a root node of the tree
     Node* root = new Node();
     //Let the root name equal to the firt tag in the vector (normally users)
-    root->set_name(data[0]);
-    int i{ 1 };
+    root->set_name(data[1]);
+    int i{ 2 };
     //Create a tree with the root and the rest of the nodes from the vector
     xml2tree(root, data, i, root);
    //Traverse the tree ###To do: change the name to depth traversal if it's not preorder one
@@ -66,8 +68,8 @@ void graph(vector <string> data)
 
 }
 
+
 //Function to represent the list of followers in a file.
-//Might need to be put before the previous function in some IDEs
 void RepresentinFile(vector<vector<int>> list)
 {
     fstream myfile;
@@ -83,5 +85,26 @@ void RepresentinFile(vector<vector<int>> list)
     myfile << "}";
     myfile.close();
 }
+//Get nDegree of all users
+vector <int> inDegree(vector <vector <int>> list){
+    vector <int> inDegree;
+    for(int i=0;i<list.size();i++){
+        inDegree[list[i][0]]++;
+
+    }
+return inDegree;
+}
+
+//Get outDegree of all users
+vector <int> outDegree(vector <vector <int>> list){
+    vector <int> outDegree;
+    for(int i=0;i<list.size();i++){
+        outDegree[list[i][1]]++;
+
+    }
+return outDegree;
+}
+
+
 
 

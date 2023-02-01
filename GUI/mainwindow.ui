@@ -41,8 +41,8 @@
    <widget class="QPushButton" name="check">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>140</y>
+      <x>490</x>
+      <y>70</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -59,10 +59,13 @@
     </property>
    </widget>
    <widget class="QPushButton" name="JSON">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>350</y>
+      <x>490</x>
+      <y>250</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -81,8 +84,8 @@
    <widget class="QPushButton" name="correct">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>140</y>
+      <x>640</x>
+      <y>70</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -101,8 +104,8 @@
    <widget class="QPushButton" name="minify">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>280</y>
+      <x>640</x>
+      <y>130</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -120,8 +123,8 @@
    <widget class="QPushButton" name="format">
     <property name="geometry">
      <rect>
-      <x>500</x>
-      <y>210</y>
+      <x>490</x>
+      <y>130</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -141,7 +144,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>350</y>
+      <y>250</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -160,8 +163,8 @@
    <widget class="QPushButton" name="compress">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>210</y>
+      <x>490</x>
+      <y>190</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -180,7 +183,7 @@
     <property name="geometry">
      <rect>
       <x>640</x>
-      <y>280</y>
+      <y>190</y>
       <width>121</width>
       <height>51</height>
      </rect>
@@ -760,6 +763,58 @@
 </string>
     </property>
    </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>32</x>
+      <y>79</y>
+      <width>441</width>
+      <height>361</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Analysis">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>310</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 5px;
+</string>
+    </property>
+    <property name="text">
+     <string>Graph Analysis</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>292</x>
+      <y>79</y>
+      <width>181</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>Browse</zorder>
    <zorder>check</zorder>
@@ -774,6 +829,9 @@
    <zorder>label</zorder>
    <zorder>Save</zorder>
    <zorder>OutputText</zorder>
+   <zorder>label_2</zorder>
+   <zorder>Analysis</zorder>
+   <zorder>label_3</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

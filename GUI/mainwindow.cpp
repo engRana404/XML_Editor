@@ -8,6 +8,7 @@
 #include <QTextStream>
 #include <QDir>
 #include <QMessageBox>
+
 //For better graphics
 #include <QGraphicsScene>
 #include <QGraphicsView>
@@ -21,6 +22,7 @@
 #include "Extras.h"
 #include "Compression.h"
 #include "Xml_Consistency.h"
+#include "XmlGraph.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -28,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->label_2->hide();
 }
 
 MainWindow::~MainWindow()
@@ -77,8 +80,8 @@ void MainWindow::on_Save_clicked()
 }
 
 void MainWindow::on_Clear_clicked(){
+    ui->label_2->hide();
     ui->OutputText->setPlainText("");
-    //ui->InputText->setPlainText("");
 }
 
 //Check the consistency
@@ -151,6 +154,47 @@ void MainWindow::on_correct_clicked(){
     ui->OutputText->setPlainText(OutString);
 }
 
+void MainWindow::on_compress_clicked(){
+   QString text = ui->OutputText->toPlainText();
+   //Turn into std string
+   string textToBeFormatted =text.toStdString();
+   vector<int> Result= CompressXML(textToBeFormatted);
+
+   string Resultstr="";
+
+   for(int i=0;i<Result.size();i++)
+       {
+           Resultstr=Resultstr+to_string(Result[i]);
+       }
+   QString OutString = QString::fromStdString(Resultstr);
+   //Show
+   ui->OutputText->setPlainText(OutString);
+
+}
+
+
+/*void MainWindow::on_decompress_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text.toStdString();
+    vector<int> Resint;
+    //int compress=stoi(textToBeFormatted);
+    for(int i=0;i<textToBeFormatted.length();i++){
+        Resint.push_back(int(textToBeFormatted[i])-48);
+    }
+    vector<string> Result=DecompressXML(Resint);
+    string Resultstr="";
+
+    for(int i=0;i<Result.size();i++)
+        {
+            Resultstr=Resultstr+Result[i];
+        }
+    QString OutString = QString::fromStdString(Resultstr);
+    //Show
+    ui->OutputText->setPlainText(OutString);
+} */
+
+
 //Turn into JSON
 void MainWindow::on_JSON_clicked(){
     QString text = ui->OutputText->toPlainText();
@@ -170,43 +214,60 @@ void MainWindow::on_JSON_clicked(){
     ui->OutputText->setPlainText(OutString);
 }
 
-//void MainWindow::on_Graph_clicked(){}
-void MainWindow::on_decompress_clicked(){
+void MainWindow::on_Graph_clicked(){
     QString text = ui->OutputText->toPlainText();
     //Turn into std string
     string textToBeFormatted =text.toStdString();
-    vector<int> Resint;
-    //int compress=stoi(textToBeFormatted);
-    for(int i=0;i<textToBeFormatted.length();i++){
-        Resint.push_back(int(textToBeFormatted[i])-48);
-    }
-    vector<string> Result=DecompressXML(Resint);
-    string Resultstr="";
+    //Put XML contents into a vector
+    vector <string> XML= convert2vector(removeSpaces(textToBeFormatted));
+    //Turn the vector into a tree
+    Node * root = new Node();
+    root->set_name(XML[1]);
+    int i{2};
+    //Turn into tree
+    xml2tree(root, XML ,i,root);
+    //Traverse the tree
+    vector <Node*>Travers =Traversal(root);
+    //Get the adjacency list of the graph
+    vector <vector <int>> GraphList =FollowerList(Travers);
+    //Represent in in a file inorder to Visualize it later
+     RepresentinFile(GraphList);
+    //Turn the dot file into an image
+    QDir::setCurrent("C:\\Program Files\\Graphviz\\bin");
+    system("dot -Tpng -O C:\\Users\\pc\\Documents\\build-DSXMLL-Desktop_Qt_6_4_1_MinGW_64_bit-Debug\\a.dot");
 
-    for(int i=0;i<Result.size();i++)
-        {
-            Resultstr=Resultstr+Result[i];
-        }
-    QString OutString = QString::fromStdString(Resultstr);
-    //Show
-    ui->OutputText->setPlainText(OutString);
+     ui->label_2->show();
+     QPixmap mypix("C:\\Users\\pc\\Documents\\build-DSXMLL-Desktop_Qt_6_4_1_MinGW_64_bit-Debug\\a.dot.png");
+     ui->label_2->setPixmap(mypix);
 }
 
-void MainWindow::on_compress_clicked(){
-   QString text = ui->OutputText->toPlainText();
-   //Turn into std string
-   string textToBeFormatted =text.toStdString();
-   vector<int> Result= CompressXML(textToBeFormatted);
+void MainWindow::on_Analysis_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text.toStdString();
+    //Put XML contents into a vector
+    vector <string> XML= convert2vector(removeSpaces(textToBeFormatted));
+    //Turn the vector into a tree
+    Node * root = new Node();
+    root->set_name(XML[1]);
+    int i{2};
+    //Turn into JSON and tree
+    xml2tree(root, XML ,i,root);
+    //Traverse the tree
+    vector <Node*>Travers =Traversal(root);
+    //Get the adjacency list of the graph
+    vector <vector <int>> GraphList =FollowerList(Travers);
+    //Get in and out degree of the graph
+    vector<int> indegree=inDegree(GraphList);
+    vector<int> outdegree=outDegree(GraphList);
 
-   string Resultstr="";
+    //int mostFollowed=distance(inDegree.begin(),std::max_element(inDegree.begin(), inDegree.end()));
+    //int mostConnected=distance(outDegree.begin(),std::max_element(outDegree.begin(), outDegree.end()));
 
-   for(int i=0;i<Result.size();i++)
-       {
-           Resultstr=Resultstr+to_string(Result[i]);
-       }
-   QString OutString = QString::fromStdString(Resultstr);
-   //Show
-   ui->OutputText->setPlainText(OutString);
+    ui->label_3->show();
+    string s="The most Followed user is the user with id equal to: "+mostFollowed+"\n and the most connected user is user: "+mostConnected;
+    QString OutString = QString::fromStdString(s);
+    ui->label_3->setText(OutString);
 
 }
 
