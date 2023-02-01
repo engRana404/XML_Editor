@@ -1,7 +1,6 @@
-/*
-This file needs TREE FILE (Node class, Tree class, and traversal function of the tree)
-IT also needs Xml to vector function
-*/
+#include <string>
+#include <vector>
+#include "XmlToTree.h"
  //A .h file to be updated soon
 
 
@@ -41,7 +40,7 @@ vector <vector <int>> FollowerList(vector <Node*> tree)
             l++;
         }
         else { //skip anything other than user.
-                i++; 
+                i++;
         }
     }
 
@@ -67,7 +66,7 @@ void graph(vector <string> data)
 
 }
 
-//Fnction to represent the list of followers in a file.
+//Function to represent the list of followers in a file.
 //Might need to be put before the previous function in some IDEs
 void RepresentinFile(vector<vector<int>> list)
 {
