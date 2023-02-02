@@ -23,7 +23,7 @@ public:
     string get_name();
     void set_name(string node_name); 
     string get_data();
-    void set_data(string node_data);
+    void set_data(string data);
     void add_child(Node* child);
     Node* pop_child();
     vector<Node*> get_children();

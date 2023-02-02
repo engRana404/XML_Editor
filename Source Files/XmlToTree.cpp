@@ -24,7 +24,7 @@ string Node::get_name()
 
 void Node::set_name(string node_name)
 {
-    this->name = name;
+    this->name = node_name;
 }
 
 string Node::get_data()
