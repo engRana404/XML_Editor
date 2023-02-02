@@ -1,16 +1,11 @@
 #include "Compression.h"
+#include "XmlToVector.h"
+
 
 using namespace std;
 
-vector<int> CompressXML(string Path)       //Takes the path of the file needed to be compressed and returns a vector of integers representing the compression sequence
+vector<int> CompressXML(string s1)       //Takes the path of the file needed to be compressed and returns a vector of integers representing the compression sequence
 {
-    ifstream XMLfile(Path);
-
-    vector<string> XMLstring(1);
-
-    string s1;     //The string variable where the XML contents will be concatenated into
-
-    readWords(XMLstring, XMLfile, s1);
 
     unordered_map<string, int> codeTable;
 
@@ -48,7 +43,7 @@ vector<int> CompressXML(string Path)       //Takes the path of the file needed t
     return outputCode;
 }
 
-vector<string> DecompressXML(vector<int> op)
+string DecompressXML(vector<int> op)
 {
     string out = "";
 
@@ -101,7 +96,5 @@ vector<string> DecompressXML(vector<int> op)
 
     string ff = sss + out;
 
-    vector<string> xmlVector = convert2vector(ff);
-
-    return xmlVector;
+    return ff;
 }

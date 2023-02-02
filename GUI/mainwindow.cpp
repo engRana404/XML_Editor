@@ -8,6 +8,7 @@
 #include <QTextStream>
 #include <QDir>
 #include <QMessageBox>
+#include <unordered_map>
 
 //For better graphics
 #include <QGraphicsScene>
@@ -31,6 +32,9 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->label_2->hide();
+    ui->label_3->hide();
+    ui->input->hide();
+    ui->input->setText("");
 }
 
 MainWindow::~MainWindow()
@@ -46,7 +50,6 @@ QString s="";
 //Open External File
 void MainWindow::on_Browse_clicked()
 {
-    //ui->InputText->clear();
     ui->OutputText->clear();
 
     QFile input_file(QFileDialog::getOpenFileName(this,tr("Open File"),"",tr("XML File (*.xml) ;;TextFile (*.txt)")));
@@ -58,10 +61,8 @@ void MainWindow::on_Browse_clicked()
     mytempfile.resize(0);
     input_file.copy("myfile.txt");
     QFile myfile("myfile.txt");
-    //ui->InputText->setPlainText(text);
-    //ui->InputText->setLineWrapMode(NoWrap);
     ui->OutputText->setPlainText(text);
-    //ui->OutputText->setLineWrapMode(NoWrap);
+   // ui->OutputText->setLineWrapMode(NoWrap);
     input_file.close();
 }
 
@@ -81,6 +82,9 @@ void MainWindow::on_Save_clicked()
 
 void MainWindow::on_Clear_clicked(){
     ui->label_2->hide();
+    ui->label_3->hide();
+    ui->input->hide();
+    ui->input->setText("");
     ui->OutputText->setPlainText("");
 }
 
@@ -155,44 +159,46 @@ void MainWindow::on_correct_clicked(){
 }
 
 void MainWindow::on_compress_clicked(){
+
    QString text = ui->OutputText->toPlainText();
+   ui->input->setText(text);
    //Turn into std string
    string textToBeFormatted =text.toStdString();
    vector<int> Result= CompressXML(textToBeFormatted);
+   QString str;
+       for(auto c:Result)
+           str.append(QString:: fromStdString(to_string(c)));
 
-   string Resultstr="";
-
-   for(int i=0;i<Result.size();i++)
-       {
-           Resultstr=Resultstr+to_string(Result[i]);
+       QString fileName = QFileDialog::getSaveFileName(this,
+                                                       tr("Save Address Book"), "",
+                                                       tr("COMP (*.comp);;All Files ()"));
+       QFile newDoc(fileName);
+       if(newDoc.open(QIODevice::WriteOnly)) {
+           QTextStream out(&newDoc);
+           out<<str;
+           newDoc.flush();
        }
-   QString OutString = QString::fromStdString(Resultstr);
+     newDoc.close();
+
+
    //Show
-   ui->OutputText->setPlainText(OutString);
+   ui->OutputText->setPlainText(str);
 
 }
 
 
-/*void MainWindow::on_decompress_clicked(){
-    QString text = ui->OutputText->toPlainText();
+void MainWindow::on_decompress_clicked(){
+    QString text = ui->input->text();
     //Turn into std string
     string textToBeFormatted =text.toStdString();
-    vector<int> Resint;
-    //int compress=stoi(textToBeFormatted);
-    for(int i=0;i<textToBeFormatted.length();i++){
-        Resint.push_back(int(textToBeFormatted[i])-48);
-    }
-    vector<string> Result=DecompressXML(Resint);
-    string Resultstr="";
+    vector<int> Resint=CompressXML(textToBeFormatted);
 
-    for(int i=0;i<Result.size();i++)
-        {
-            Resultstr=Resultstr+Result[i];
-        }
-    QString OutString = QString::fromStdString(Resultstr);
+    string Result=DecompressXML(Resint);
+
+    QString OutString = QString::fromStdString(Result);
     //Show
     ui->OutputText->setPlainText(OutString);
-} */
+}
 
 
 //Turn into JSON
@@ -251,7 +257,7 @@ void MainWindow::on_Analysis_clicked(){
     Node * root = new Node();
     root->set_name(XML[1]);
     int i{2};
-    //Turn into JSON and tree
+    //Turn tree
     xml2tree(root, XML ,i,root);
     //Traverse the tree
     vector <Node*>Travers =Traversal(root);
@@ -261,12 +267,14 @@ void MainWindow::on_Analysis_clicked(){
     vector<int> indegree=inDegree(GraphList);
     vector<int> outdegree=outDegree(GraphList);
 
-    //int mostFollowed=distance(inDegree.begin(),std::max_element(inDegree.begin(), inDegree.end()));
-    //int mostConnected=distance(outDegree.begin(),std::max_element(outDegree.begin(), outDegree.end()));
+    int mostFollowed=maxdegree(indegree);
+    int mostConnected=maxdegree(outdegree);
 
     ui->label_3->show();
-    string s="The most Followed user is the user with id equal to: "+mostFollowed+"\n and the most connected user is user: "+mostConnected;
-    QString OutString = QString::fromStdString(s);
+    string s="";
+    s=s+"The most Followed user is: "+to_string(mostFollowed);
+    string n ="\n most connected user is : "+to_string(mostConnected);
+    QString OutString = QString::fromStdString(s+n);
     ui->label_3->setText(OutString);
 
 }

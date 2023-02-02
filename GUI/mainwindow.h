@@ -44,7 +44,7 @@ private slots:
    void on_correct_clicked();
    void on_check_clicked();
    void on_Graph_clicked();
-  // void on_decompress_clicked();
+  void on_decompress_clicked();
    void on_compress_clicked();
    void on_Analysis_clicked();
 

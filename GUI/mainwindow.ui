@@ -815,6 +815,19 @@
      <string/>
     </property>
    </widget>
+   <widget class="QLabel" name="input">
+    <property name="geometry">
+     <rect>
+      <x>22</x>
+      <y>79</y>
+      <width>461</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>Browse</zorder>
    <zorder>check</zorder>
@@ -832,6 +845,7 @@
    <zorder>label_2</zorder>
    <zorder>Analysis</zorder>
    <zorder>label_3</zorder>
+   <zorder>input</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">

@@ -87,24 +87,46 @@ void RepresentinFile(vector<vector<int>> list)
 }
 //Get nDegree of all users
 vector <int> inDegree(vector <vector <int>> list){
-    vector <int> inDegree;
-    for(int i=0;i<list.size();i++){
-        inDegree[list[i][0]]++;
+    int n=list.size();
 
+    vector <int> indegree(n,0);
+
+     for (int i = 0; i < (int)list.size(); i++)
+    {
+        for (int j = 1; j < (int)list[i].size(); j++)
+        {
+           indegree[list[i][0]]++;
+
+        }
     }
-return inDegree;
+return indegree;
 }
 
 //Get outDegree of all users
 vector <int> outDegree(vector <vector <int>> list){
-    vector <int> outDegree;
-    for(int i=0;i<list.size();i++){
-        outDegree[list[i][1]]++;
 
+    int n=list.size();
+    vector <int> outdegree(n,0);
+
+     for (int i = 0; i < (int)list.size(); i++)
+    {
+        for (int j = 1; j < (int)list[i].size(); j++)
+        {
+           outdegree[list[i][j]]++;
+
+        }
     }
-return outDegree;
+return outdegree;
 }
+int maxdegree(vector<int> degree){
+    int maxm=0;
+    int maxin=0;
 
-
+    for(int i=0; i<degree.size();i++){
+       if(degree[i]>maxm) {
+               maxin=i;
+               maxm=degree[i];
+    } }
+    return maxin; }
 
 
