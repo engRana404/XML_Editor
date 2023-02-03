@@ -6,6 +6,15 @@
 #include "readXml.h"
 #include "XmlToVector.h"
 using namespace std;
+/*
+*Input: string vector of XML
+*brief description:
+    This function returns false in case of missing closing, opening tags or mismatched tags. 
+    First, it iterates XML file line by line and pushes opening tags to stack if there is no comment or prolog. 
+    Second, it checks closing tags to detect mismatched tags by comparing each closing and top of opening tags 
+    if they match then pop from the stack else returns false, to detect closing without opening. In the end, 
+    if the stack is empty,  it will return true
+*/
 //IsConsistent function returns false in case of missing closing or opening tags or mismatching tags
 bool IsConsistent(vector<string> xmlFile){
     stack<string> tag;
