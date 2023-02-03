@@ -7,7 +7,6 @@ string json_formatter(string input)
 	int tabs, tokens; //here tokens are  { } , :
 	tokens = -1;
 	char ch;
-	//fin.open(file_path.c_str());
 	for(int i = 0; i < input.size(); i++)
 	{
 			if (input[i] == '{')
@@ -20,16 +19,16 @@ string json_formatter(string input)
 					json += "\n";
 				while (tabs)
 				{
-					json += "\t";
+                    json += " ";
 					tabs--;
 				}
-				json = json + '{' + "\n";
+                json = json + '{' + "\n";
 
 				//json key:value tabs
 				tabs = tokens + 1;
 				while (tabs)
 				{
-					json += "\t";
+                    json += " ";
 					tabs--;
 				}
 			}
@@ -43,7 +42,7 @@ string json_formatter(string input)
 				tabs = tokens + 1;
 				while (tabs)
 				{
-					json += "\t";
+                    json += " ";
 					tabs--;
 				}
 			}
@@ -53,7 +52,7 @@ string json_formatter(string input)
 				json += "\n";
 				while (tabs)
 				{
-					json += "\t";
+                    json += " ";
 					tabs--;
 				}
 
@@ -63,18 +62,18 @@ string json_formatter(string input)
 
 				while (tabs)
 				{
-					json += "\t";
+                    json += " ";
 					tabs--;
 				}
 			}
 			else
 			{
-				if (input[i] == '\n' || input[i] == '\t')
+                if (input[i] == '\n' || input[i] == ' ')
 					continue;
 				else
 					json += input[i];
 			}
-		}
+
 	}
 	return json;
 }

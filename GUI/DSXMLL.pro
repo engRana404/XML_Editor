@@ -22,6 +22,8 @@ SOURCES += \
     Extras.cpp\
     Compression.cpp\
     Search_Post.cpp\
+    JSON2XML.cpp\
+    JSON_Formatter.cpp
 
 
 HEADERS += \
@@ -38,6 +40,8 @@ HEADERS += \
     Compression.h\
     XmlGraph.h\
     Search_Post.h\
+    JSON2XML.h\
+    JSON_Formatter.h
 
 FORMS += \
     mainwindow.ui

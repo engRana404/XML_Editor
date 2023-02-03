@@ -26,6 +26,9 @@
 #include "Xml_Consistency.h"
 #include "XmlGraph.h"
 #include "Search_post.h"
+#include "JSON2XML.h"
+#include "JSON_Formatter.h"+
+
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -204,9 +207,10 @@ void MainWindow::on_decompress_clicked(){
 }
 
 
-//Turn into JSON
+//Turn XML into JSON
 void MainWindow::on_JSON_clicked(){
     QString text = ui->OutputText->toPlainText();
+    ui->input->setText(text);
     //Turn into std string
     string textToBeFormatted =text.toStdString();
     vector <string> Result= convert2vector(removeSpaces(textToBeFormatted));
@@ -221,6 +225,25 @@ void MainWindow::on_JSON_clicked(){
     QString OutString = QString::fromStdString(VectorToString(JSON));
     //Show
     ui->OutputText->setPlainText(OutString);
+}
+//Turn JSON into XML
+void MainWindow::on_JS_clicked(){
+    /* QString text =ui->OutputText->toPlainText();
+    //Turn into std string
+     string textToBeFormatted =text.toStdString();
+     string result= JSON2XML(textToBeFormatted);*/
+     //QString OutString = QString::fromStdString(result);
+    //Show
+    ui->OutputText->setPlainText(ui->input->text());
+}
+
+void MainWindow::on_JSONformat_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text.toStdString();
+    string result=json_formatter(textToBeFormatted);
+    ui->OutputText->setPlainText(QString::fromStdString(result));
+
 }
 
 void MainWindow::on_Graph_clicked(){
@@ -241,13 +264,19 @@ void MainWindow::on_Graph_clicked(){
     vector <vector <int>> GraphList =FollowerList(Travers);
     //Represent in in a file inorder to Visualize it later
      RepresentinFile(GraphList);
-    //Turn the dot file into an image
-    QDir::setCurrent("C:\\Program Files\\Graphviz\\bin");
-    system("dot -Tpng -O C:\\Users\\pc\\Documents\\build-DSXMLL-Desktop_Qt_6_4_1_MinGW_64_bit-Debug\\a.dot");
 
+    //Turn the dot file into an image
+    QDir::setCurrent(".\\");
+
+     system("dot -Tpng -O a.dot");
      ui->label_2->show();
-     QPixmap mypix("C:\\Users\\pc\\Documents\\build-DSXMLL-Desktop_Qt_6_4_1_MinGW_64_bit-Debug\\a.dot.png");
+     QPixmap mypix(".\\a.dot.png");
      ui->label_2->setPixmap(mypix);
+
+     QMessageBox msgBox;
+     msgBox.setText("Your file is at"+ QDir::currentPath());
+     msgBox.exec();
+
 }
 
 void MainWindow::on_Analysis_clicked(){

@@ -41,6 +41,7 @@ private slots:
     void on_Browse_clicked();
     void on_minify_clicked();
    void on_JSON_clicked();
+   void on_JS_clicked();
    void on_correct_clicked();
    void on_check_clicked();
    void on_Graph_clicked();
@@ -49,7 +50,7 @@ private slots:
    void on_Analysis_clicked();
    void on_Mutual_clicked();
    void on_search_clicked();
-
+   void on_JSONformat_clicked();
 
 
 

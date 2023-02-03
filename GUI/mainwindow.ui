@@ -41,7 +41,7 @@
    <widget class="QPushButton" name="check">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>510</x>
       <y>70</y>
       <width>131</width>
       <height>51</height>
@@ -64,7 +64,7 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>510</x>
       <y>250</y>
       <width>131</width>
       <height>51</height>
@@ -78,13 +78,13 @@
 </string>
     </property>
     <property name="text">
-     <string>Turn to JSON</string>
+     <string>XML to JSON</string>
     </property>
    </widget>
    <widget class="QPushButton" name="correct">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>650</x>
       <y>70</y>
       <width>131</width>
       <height>51</height>
@@ -104,7 +104,7 @@
    <widget class="QPushButton" name="minify">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>650</x>
       <y>130</y>
       <width>131</width>
       <height>51</height>
@@ -123,7 +123,7 @@
    <widget class="QPushButton" name="format">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>510</x>
       <y>130</y>
       <width>131</width>
       <height>51</height>
@@ -143,8 +143,8 @@
    <widget class="QPushButton" name="Graph">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>250</y>
+      <x>510</x>
+      <y>310</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -163,7 +163,7 @@
    <widget class="QPushButton" name="compress">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>510</x>
       <y>190</y>
       <width>121</width>
       <height>51</height>
@@ -182,7 +182,7 @@
    <widget class="QPushButton" name="decompress">
     <property name="geometry">
      <rect>
-      <x>640</x>
+      <x>650</x>
       <y>190</y>
       <width>121</width>
       <height>51</height>
@@ -738,8 +738,8 @@
      <rect>
       <x>20</x>
       <y>70</y>
-      <width>461</width>
-      <height>381</height>
+      <width>481</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="cursor" stdset="0">
@@ -749,8 +749,8 @@
    <widget class="QGraphicsView" name="graphicsView">
     <property name="geometry">
      <rect>
-      <x>-5</x>
-      <y>1</y>
+      <x>0</x>
+      <y>0</y>
       <width>801</width>
       <height>581</height>
      </rect>
@@ -769,10 +769,10 @@
     </property>
     <property name="geometry">
      <rect>
-      <x>32</x>
-      <y>79</y>
-      <width>441</width>
-      <height>361</height>
+      <x>20</x>
+      <y>70</y>
+      <width>481</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="autoFillBackground">
@@ -785,7 +785,7 @@
    <widget class="QPushButton" name="Analysis">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>650</x>
       <y>310</y>
       <width>131</width>
       <height>51</height>
@@ -805,23 +805,35 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>272</x>
-      <y>79</y>
-      <width>171</width>
-      <height>371</height>
+      <x>20</x>
+      <y>70</y>
+      <width>481</width>
+      <height>391</height>
      </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
     </property>
     <property name="text">
      <string/>
+    </property>
+    <property name="textFormat">
+     <enum>Qt::PlainText</enum>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+    <property name="wordWrap">
+     <bool>true</bool>
     </property>
    </widget>
    <widget class="QLabel" name="input">
     <property name="geometry">
      <rect>
-      <x>22</x>
-      <y>79</y>
-      <width>461</width>
-      <height>371</height>
+      <x>20</x>
+      <y>70</y>
+      <width>481</width>
+      <height>391</height>
      </rect>
     </property>
     <property name="text">
@@ -831,8 +843,8 @@
    <widget class="QPushButton" name="Mutual">
     <property name="geometry">
      <rect>
-      <x>640</x>
-      <y>310</y>
+      <x>650</x>
+      <y>370</y>
       <width>131</width>
       <height>51</height>
      </rect>
@@ -851,7 +863,7 @@
    <widget class="QPushButton" name="search">
     <property name="geometry">
      <rect>
-      <x>490</x>
+      <x>510</x>
       <y>370</y>
       <width>131</width>
       <height>51</height>
@@ -866,6 +878,52 @@
     </property>
     <property name="text">
      <string>post search</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="JS">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>250</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 5px;
+</string>
+    </property>
+    <property name="text">
+     <string>JSON to XML</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="JSONformat">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
+    <property name="geometry">
+     <rect>
+      <x>580</x>
+      <y>430</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 5px;
+</string>
+    </property>
+    <property name="text">
+     <string>Format JSON</string>
     </property>
    </widget>
    <zorder>graphicsView</zorder>
@@ -888,6 +946,8 @@
    <zorder>input</zorder>
    <zorder>Mutual</zorder>
    <zorder>search</zorder>
+   <zorder>JS</zorder>
+   <zorder>JSONformat</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
