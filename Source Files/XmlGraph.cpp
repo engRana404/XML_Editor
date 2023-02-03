@@ -2,6 +2,7 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <String>
 #include "XmlToTree.h"
 #include "XmlGraph.h"
 
@@ -59,7 +60,7 @@ void graph(vector <string> data)
     int i{ 2 };
     //Create a tree with the root and the rest of the nodes from the vector
     xml2tree(root, data, i, root);
-   //Traverse the tree ###To do: change the name to depth traversal if it's not preorder one
+   //Traverse the tree
     vector <Node*> t = Traversal(root);
    //Make a vector of vectors of the followers using the previous function
     vector <vector <int>> v = FollowerList(t);
@@ -130,3 +131,23 @@ int maxdegree(vector<int> degree){
     return maxin; }
 
 
+string Mutual(int n1,int n2,vector <vector <int>> list){
+    vector <int> mutual;
+    string m="";
+    int count=0;
+    for (int i = 0; i < (int)list.size(); i++)
+   {
+       count = 0;
+       for (int j = 1; j < (int)list[i].size(); j++)
+       {
+          if(list[i][j]==n1 ||list[i][j]==n2){count++;}
+          if(count==2){mutual.push_back(list[i][0]);}
+       }
+   }
+   for(int i=0;i<(int)mutual.size();i++){
+       m=m+to_string(mutual[i])+" ";
+
+   }
+   return "The mutuals between "+to_string(n1)+" and  "+to_string(n2)+" are \n "+m;
+
+}

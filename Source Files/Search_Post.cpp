@@ -6,7 +6,7 @@ int Search_String(string str,string SearchWord){
             return 1;
         return -1;
 }
-void Search_Post(vector <string> XmlVector,string word){
+string Search_Post(vector <string> XmlVector,string word){
     Node* root = new Node();
     root->set_name(XmlVector[1]);
     int k{ 2 };
@@ -33,15 +33,15 @@ void Search_Post(vector <string> XmlVector,string word){
         }
 
     }
-
+string s="";
     for(int i=0;i<p.size();i++){
         for(int j=0;j<(p[i]->get_children()).size();j++){
             if((p[i]->get_children())[j]->get_name()=="<body>"){
                 if(Search_String((p[i]->get_children())[j]->get_data(),word)==1)
-                    cout<<"Body:"<< (p[i]->get_children())[j]->get_data()<<endl;
+                    s=s+"Body: "+(p[i]->get_children())[j]->get_data()+"\n";
             }
         }
 
     }
-
+return s;
 }

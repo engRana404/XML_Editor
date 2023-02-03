@@ -47,6 +47,9 @@ private slots:
   void on_decompress_clicked();
    void on_compress_clicked();
    void on_Analysis_clicked();
+   void on_Mutual_clicked();
+   void on_search_clicked();
+
 
 
 

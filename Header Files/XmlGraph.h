@@ -10,3 +10,4 @@ void RepresentinFile(vector<vector<int>> list);
 vector <int> inDegree(vector <vector <int>> list);
 vector <int> outDegree(vector <vector <int>> list);
 int maxdegree(vector<int> degree);
+string Mutual(int n1,int n2,vector <vector <int>> list);

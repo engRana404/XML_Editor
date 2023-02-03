@@ -8,6 +8,7 @@
 #include <QTextStream>
 #include <QDir>
 #include <QMessageBox>
+#include <QInputDialog>
 #include <unordered_map>
 
 //For better graphics
@@ -24,6 +25,7 @@
 #include "Compression.h"
 #include "Xml_Consistency.h"
 #include "XmlGraph.h"
+#include "Search_post.h"
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -35,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->label_3->hide();
     ui->input->hide();
     ui->input->setText("");
+    ui->OutputText->setReadOnly(false);
 }
 
 MainWindow::~MainWindow()
@@ -276,6 +279,62 @@ void MainWindow::on_Analysis_clicked(){
     string n ="\n most connected user is : "+to_string(mostConnected);
     QString OutString = QString::fromStdString(s+n);
     ui->label_3->setText(OutString);
+
+}
+
+void MainWindow::on_Mutual_clicked(){
+    QString text = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text.toStdString();
+    //Put XML contents into a vector
+    vector <string> XML= convert2vector(removeSpaces(textToBeFormatted));
+    //Turn the vector into a tree
+    Node * root = new Node();
+    root->set_name(XML[1]);
+    int i{2};
+    //Turn tree
+    xml2tree(root, XML ,i,root);
+    //Traverse the tree
+    vector <Node*>Travers =Traversal(root);
+    //Get the adjacency list of the graph
+    vector <vector <int>> GraphList =FollowerList(Travers);
+
+    bool ok;
+        qint8 text1 = QInputDialog::getInt(this, tr("Find Mutuals"), tr("Enter User1: "),0,-2147483647, 2147483647, 1, &ok);
+
+        if (ok && text1){
+            qint8 text2 = QInputDialog::QInputDialog::getInt(this, tr("Find Mutuals"), tr("Enter User2: "),0,-2147483647, 2147483647, 1, &ok);
+            if(ok&&text2){
+                string s=Mutual(text1,text2,GraphList);
+                ui->label_3->show();
+                //string result=to_string(s);
+
+                 QString OutString = QString::fromStdString(s);
+                ui->label_3->setText(OutString);}
+
+
+        }
+}
+
+void MainWindow::on_search_clicked(){
+    QString text0 = ui->OutputText->toPlainText();
+    //Turn into std string
+    string textToBeFormatted =text0.toStdString();
+    vector <string> XML= convert2vector(removeSpaces(textToBeFormatted));
+    string word;
+    bool ok;
+    QString text = QInputDialog::getText(this, tr("Search for Word"),
+                                         tr("Enter the word: "), QLineEdit::Normal,
+                                         QDir::home().dirName(), &ok);
+    if (ok && !text.isEmpty()){
+        word=text.toStdString();
+        string body = Search_Post(XML,word);
+        QString OutString = QString::fromStdString(body);
+        ui->label_3->show();
+        ui->label_3->setText(OutString);
+
+
+    }
 
 }
 

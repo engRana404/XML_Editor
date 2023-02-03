@@ -21,6 +21,7 @@ SOURCES += \
     CorrectErr.cpp\
     Extras.cpp\
     Compression.cpp\
+    Search_Post.cpp\
 
 
 HEADERS += \
@@ -36,6 +37,7 @@ HEADERS += \
     Extras.h\
     Compression.h\
     XmlGraph.h\
+    Search_Post.h\
 
 FORMS += \
     mainwindow.ui

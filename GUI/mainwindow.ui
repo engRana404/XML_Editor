@@ -805,9 +805,9 @@
    <widget class="QLabel" name="label_3">
     <property name="geometry">
      <rect>
-      <x>292</x>
+      <x>272</x>
       <y>79</y>
-      <width>181</width>
+      <width>171</width>
       <height>371</height>
      </rect>
     </property>
@@ -828,6 +828,46 @@
      <string/>
     </property>
    </widget>
+   <widget class="QPushButton" name="Mutual">
+    <property name="geometry">
+     <rect>
+      <x>640</x>
+      <y>310</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 5px;
+</string>
+    </property>
+    <property name="text">
+     <string>Find Mutuals</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="search">
+    <property name="geometry">
+     <rect>
+      <x>490</x>
+      <y>370</y>
+      <width>131</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 5px;
+</string>
+    </property>
+    <property name="text">
+     <string>post search</string>
+    </property>
+   </widget>
    <zorder>graphicsView</zorder>
    <zorder>Browse</zorder>
    <zorder>check</zorder>
@@ -846,6 +886,8 @@
    <zorder>Analysis</zorder>
    <zorder>label_3</zorder>
    <zorder>input</zorder>
+   <zorder>Mutual</zorder>
+   <zorder>search</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
