@@ -1,3 +1,11 @@
+/*
+*brief description: looping XML file to correct errors with 3 types: 
+    1- mismatched tags corrected by making a closing that fits the opening tag
+    2- closing tag without opening one corrected by removing it
+    3- opening tag without closing tag corrected by adding it
+*Input: string vector of XML
+*output: return map that contains corrected error and line number of error
+*/
 #include "CorrectErr.h"
 map<int, string> CorrectErr(vector<string> xml){
     map<int, string> result;
