@@ -1,12 +1,4 @@
-#include <iostream>
-#include <stack>
-#include <fstream>
-#include <string>
-#include <vector>
-#include <map>
-#include "readXml.h"
-#include "XmlToVector.h"
-using namespace std;
+#include "CorrectErr.h"
 map<int, string> CorrectErr(vector<string> xml){
     map<int, string> result;
     stack<string> tag;
@@ -18,7 +10,7 @@ map<int, string> CorrectErr(vector<string> xml){
                 if (l[1] == '/') {
                     if(!tag.empty()){
                         if (l != ("</" + tag.top())) {
-                            // tags mismatch -> make a closing tag that fits the opening one
+                            // tags mismatch --> make a closing tag that fits the opening one
                             result[i] = "</" + tag.top();
                             tag.pop();
                             lineNum.pop();
@@ -29,7 +21,7 @@ map<int, string> CorrectErr(vector<string> xml){
                         }
                     }
                     else{
-                        // closing tag without opening tag    ->   remove it
+                        // closing tag without opening tag    --->   remove it
                         result.erase(i);
                     }
                 }
@@ -66,4 +58,3 @@ map<int, string> CorrectErr(vector<string> xml){
         }
         return result;
 }
-
