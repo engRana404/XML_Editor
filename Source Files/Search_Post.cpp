@@ -12,7 +12,6 @@ void Search_Post(vector <string> XmlVector,string word){
     int k{ 2 };
     xml2tree(root, XmlVector, k, root);
     vector <Node*> tree = Traversal(root);
-    string SearchWord=word;
     root->set_name(tree[0]->get_name());
 	vector<Node*>tags_children = root->get_children();
 	vector<Node*>posts(0);
@@ -38,7 +37,7 @@ void Search_Post(vector <string> XmlVector,string word){
     for(int i=0;i<p.size();i++){
         for(int j=0;j<(p[i]->get_children()).size();j++){
             if((p[i]->get_children())[j]->get_name()=="<body>"){
-                if(Search_String((p[i]->get_children())[j]->get_data(),SearchWord)==1)
+                if(Search_String((p[i]->get_children())[j]->get_data(),word)==1)
                     cout<<"Body:"<< (p[i]->get_children())[j]->get_data()<<endl;
             }
         }
