@@ -1,3 +1,11 @@
+/*
+*Search_Post brief description: 
+    1- it converts vector to tree and get root "users" and its children "user" .
+    2- looping tree to get all "user" tags then getting "post" and looping each post to get "body" then if it contains a word, it will return the whole body and if more than one post has this word so it will append it to string and return all matching posts.
+
+*Input: string vector of XML and search word
+*output: return string contains all matching posts
+*/
 #include "Search_Post.h"
 
 int Search_String(string str,string SearchWord){
