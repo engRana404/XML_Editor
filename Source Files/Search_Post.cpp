@@ -17,7 +17,6 @@ string Search_Post(vector <string> XmlVector,string word){
 	vector<Node*>posts(0);
     Node* temp=new Node();
     vector<Node*>p(0);
-    vector<Node*>topics(0);
     for (int i = 0; i < tags_children.size(); i++) {
 			if (tags_children[i]->get_name() == "<user>"){
                 if((tags_children[0]->get_children())[2]->get_name()=="<posts>")
